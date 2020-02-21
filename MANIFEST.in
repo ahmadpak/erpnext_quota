@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include erpnext_quota *.css
+recursive-include erpnext_quota *.csv
+recursive-include erpnext_quota *.html
+recursive-include erpnext_quota *.ico
+recursive-include erpnext_quota *.js
+recursive-include erpnext_quota *.json
+recursive-include erpnext_quota *.md
+recursive-include erpnext_quota *.png
+recursive-include erpnext_quota *.py
+recursive-include erpnext_quota *.svg
+recursive-include erpnext_quota *.txt
+recursive-exclude erpnext_quota *.pyc
