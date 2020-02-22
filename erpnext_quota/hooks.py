@@ -93,6 +93,9 @@ doc_events = {
     'on_update': 'erpnext_quota.erpnext_quota.quota.user_limit'
   },
   '*': {
+    'submit': 'erpnext_quota.erpnext_quota.quota.space_limit'
+  },
+  'File': {
     'validate': 'erpnext_quota.erpnext_quota.quota.space_limit'
   }
 }
