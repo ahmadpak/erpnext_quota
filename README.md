@@ -19,6 +19,7 @@ After installation and creating new users file quota.json will get update and lo
 {"users": 5, "space": 5120, "used_space": 9, "active_users": 3}
 
 To see the Usage info with the portal visit the page 'Usage Info'
-![Usage Info Screen Shot](images/usage_info.png)
+![Usage Info Screenshot](images/usage_info.png)
+![Usage Info Error Screenshot](images/usage_info_error.png)
 #### License
 MIT
