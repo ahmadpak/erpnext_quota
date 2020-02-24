@@ -92,6 +92,9 @@ doc_events = {
     'validate': 'erpnext_quota.erpnext_quota.quota.user_limit',
     'on_update': 'erpnext_quota.erpnext_quota.quota.user_limit'
   },
+  'Company': {
+    "validate":'erpnext_quota.erpnext_quota.quota.company_limit'
+  },
   '*': {
     'submit': 'erpnext_quota.erpnext_quota.quota.space_limit'
   },

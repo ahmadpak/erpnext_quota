@@ -2,6 +2,8 @@ import frappe
 import json
 import os
 import subprocess
+from frappe.utils import cint
+from frappe import _
 
 def user_limit(self, cdt):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
@@ -61,5 +63,17 @@ def space_limit(self, cdt):
     data = json.load(outfile)
   data['used_space'] = total_size
 
+  with open(frappe.get_site_path('quota.json'), 'w') as outfile:
+    json.dump(data, outfile)
+
+def company_limit(self,method):
+  with open(frappe.get_site_path('quota.json')) as jsonfile:
+      limit_setting = json.load(jsonfile)
+  total_company = len(frappe.db.get_all('Company',filters={}))
+  if total_company >= cint(limit_setting.get('company')):
+    frappe.throw(_("Only {} company allowed and you have {} company.Please remove other company or to increase the limit please contact sales").format(limit_setting.get('company'),total_company))
+  with open(frappe.get_site_path('quota.json')) as outfile:
+    data = json.load(outfile)
+    data['used_company'] = total_company
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
     json.dump(data, outfile)
