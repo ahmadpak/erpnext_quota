@@ -7,9 +7,11 @@
  "field_order": [
   "users_allowed",
   "space_allowed",
+  "company_allowed",
   "column_break_3",
   "active_users",
-  "used_space"
+  "used_space",
+  "active_company"
  ],
  "fields": [
   {
@@ -39,10 +41,22 @@
    "fieldtype": "Int",
    "label": "Used Space (MB)",
    "read_only": 1
+  },
+  {
+   "fieldname": "company_allowed",
+   "fieldtype": "Int",
+   "label": "Company Allowed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "active_company",
+   "fieldtype": "Int",
+   "label": "Active Company",
+   "read_only": 1
   }
  ],
  "issingle": 1,
- "modified": "2020-02-21 18:37:44.118723",
+ "modified": "2020-02-25 14:54:23.028110",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
