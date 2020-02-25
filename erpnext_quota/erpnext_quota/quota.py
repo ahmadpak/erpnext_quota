@@ -70,8 +70,12 @@ def company_limit(self,method):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
       limit_setting = json.load(jsonfile)
   total_company = len(frappe.db.get_all('Company',filters={}))
+  print('total company: ', total_company)
   if total_company >= cint(limit_setting.get('company')):
-    frappe.throw(_("Only {} company allowed and you have {} company.Please remove other company or to increase the limit please contact sales").format(limit_setting.get('company'),total_company))
+    if not frappe.get_list('Company', filters={
+      'name': self.name
+    }):  
+      frappe.throw(_("Only {} company allowed and you have {} company.Please remove other company or to increase the limit please contact sales").format(limit_setting.get('company'),total_company))
   with open(frappe.get_site_path('quota.json')) as outfile:
     data = json.load(outfile)
     data['used_company'] = total_company
