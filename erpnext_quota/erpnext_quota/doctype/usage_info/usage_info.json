@@ -55,8 +55,9 @@
    "read_only": 1
   }
  ],
+ "hide_toolbar": 1,
  "issingle": 1,
- "modified": "2020-02-25 14:54:23.028110",
+ "modified": "2020-06-22 18:14:32.139205",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",

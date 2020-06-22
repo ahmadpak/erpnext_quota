@@ -2,7 +2,11 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Usage Info', {
-	refresh: function(frm) {
+	setup: function (frm){
+		frm.disable_save();
+	},
+	onload_post_render: function (frm){
+		frm.disable_save();
 		frm.call('get_usage_info').then( r => {
 			if(r.message){
 				frm.doc.users_allowed = r.message[0]
@@ -19,5 +23,9 @@ frappe.ui.form.on('Usage Info', {
 				frm.refresh_field('active_company')
 			}
 		})
+	},
+	refresh: function(frm) {
+		frm.disable_save();
+		
 	}
 });

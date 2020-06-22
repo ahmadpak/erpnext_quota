@@ -8,26 +8,40 @@ from frappe import _
 def user_limit(self, cdt):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
       parsed = json.load(jsonfile)
+  count_website_users = parsed["count_website_users"]
   allowed_users = parsed["users"]
   user_list = frappe.get_list('User', filters = {
     'enabled': 1,
     'name': ['!=','Guest']
-  }, page_length = 2000000)
-  if len(user_list)>= allowed_users:
+  }, fields = ["email"])
+
+  active_users = 0
+  if count_website_users == 1 : active_users = len(user_list)
+  else:
+    for user in user_list:
+      roles = frappe.get_list("Has Role", filters = {
+        'parent': user.email
+      }, fields = ['role'])
+      for row in roles:
+        if frappe.get_value("Role", row.role, "desk_access") == 1: 
+          active_users += 1
+          break
+
+  if active_users >= allowed_users:
     if not frappe.get_list('User', filters={
       'name': self.name
     }):
       frappe.throw('Only {} active users allowed and you have {} active users. Please disable users or to increase the limit please contact sales'. format(allowed_users, len(user_list))) 
-    elif self.enabled == 1 and len(user_list) > allowed_users:
+    elif self.enabled == 1 and active_users > allowed_users:
       frappe.throw('Only {} active users allowed and you have {} active users. Please disable users or to increase the limit please contact sales'. format(allowed_users, len(user_list)-1)) 
 
   data = {}
   with open(frappe.get_site_path('quota.json')) as outfile:
     data = json.load(outfile)
-  data['active_users'] = len(user_list)
+  data['active_users'] = active_users
 
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
-    json.dump(data, outfile)
+    json.dump(data, outfile, indent= 2)
 
 
 def space_limit(self, cdt):
@@ -64,7 +78,7 @@ def space_limit(self, cdt):
   data['used_space'] = total_size
 
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
-    json.dump(data, outfile)
+    json.dump(data, outfile, indent= 2)
 
 def company_limit(self,method):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
@@ -79,4 +93,4 @@ def company_limit(self,method):
     data = json.load(outfile)
     data['used_company'] = total_company
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
-    json.dump(data, outfile)
+    json.dump(data, outfile, indent= 2)
