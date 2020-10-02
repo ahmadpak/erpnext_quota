@@ -4,7 +4,7 @@ App to manage ERPNext User, Company and Space limitations
 ##### Note: Space size does not include database size.
 
 #### How to Install
-bench get-app --branch master erpnext_quota https://github.com/MohammadAhmad1990/erpnext_quota
+bench get-app --branch master erpnext_quota https://github.com/ahmadpak/erpnext_quota
 bench include-app erpnext_quota
 bench --site *site_name* install-app erpnext_quota
 
