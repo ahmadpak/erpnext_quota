@@ -4,7 +4,7 @@ import os
 
 def before_install():
   data = {
-    'user': 5,
+    'users': 5,
     'space': 5120,
     'company': 2,
     'count_website_users': 0
