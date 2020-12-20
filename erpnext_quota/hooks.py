@@ -93,35 +93,24 @@ doc_events = {
     'on_update': 'erpnext_quota.erpnext_quota.quota.user_limit'
   },
   'Company': {
-    "validate":'erpnext_quota.erpnext_quota.quota.company_limit'
+    'validate':'erpnext_quota.erpnext_quota.quota.company_limit',
+    'on_update':'erpnext_quota.erpnext_quota.quota.company_limit'
   },
   '*': {
-    'submit': 'erpnext_quota.erpnext_quota.quota.space_limit'
+    'on_submit': 'erpnext_quota.erpnext_quota.quota.db_space_limit'
   },
   'File': {
-    'validate': 'erpnext_quota.erpnext_quota.quota.space_limit'
+    'validate': 'erpnext_quota.erpnext_quota.quota.files_space_limit'
   }
 }
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"erpnext_quota.tasks.all"
-# 	],
-# 	"daily": [
-# 		"erpnext_quota.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"erpnext_quota.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"erpnext_quota.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"erpnext_quota.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+	"daily": [
+		"erpnext_quota.tasks.daily"
+	]
+}
 
 # Testing
 # -------
