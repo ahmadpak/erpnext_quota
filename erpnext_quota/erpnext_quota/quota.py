@@ -65,6 +65,7 @@ def validate_db_space_limit():
       parsed = json.load(jsonfile)
   allowed_db_space = parsed["db_space"]
   used_db_space = frappe.db.sql('''SELECT `table_schema` as `database_name`, SUM(`data_length` + `index_length`) / 1024 / 1024 AS `database_size` FROM information_schema.tables  GROUP BY `table_schema`''')[1][1]
+  used_db_space = int(used_db_space)
   parsed['used_db_space'] = used_db_space
   
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
@@ -72,7 +73,7 @@ def validate_db_space_limit():
   
   if used_db_space > allowed_db_space:
     msg = '<div>You have exceeded your Database Size Limit. Please contact sales to upgrade your package</div>'
-    msg += '<ul><li>Allowed Space: {}</li><li>Used Space: {}</li></ul>'.format(allowed_db_space, used_db_space)
+    msg += '<ul><li>Allowed Space: {}MB</li><li>Used Space: {}MB</li></ul>'.format(allowed_db_space, used_db_space)
     frappe.throw(_(msg))
 
 
