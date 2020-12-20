@@ -5,27 +5,24 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "users_allowed",
-  "space_allowed",
-  "company_allowed",
+  "users",
+  "space",
+  "company",
   "column_break_3",
   "active_users",
   "used_space",
-  "active_company"
+  "used_company",
+  "space_usage_details_section",
+  "private_files_size",
+  "public_files_size",
+  "column_break_11",
+  "backup_files_size",
+  "database_details_section",
+  "db_space",
+  "column_break_15",
+  "used_db_space"
  ],
  "fields": [
-  {
-   "fieldname": "users_allowed",
-   "fieldtype": "Int",
-   "label": "Users Allowed",
-   "read_only": 1
-  },
-  {
-   "fieldname": "space_allowed",
-   "fieldtype": "Int",
-   "label": "Space Allowed (MB)",
-   "read_only": 1
-  },
   {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
@@ -43,13 +40,75 @@
    "read_only": 1
   },
   {
-   "fieldname": "company_allowed",
+   "fieldname": "space_usage_details_section",
+   "fieldtype": "Section Break",
+   "label": "Space Usage Details"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "private_files_size",
+   "fieldtype": "Int",
+   "label": "Private Files (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "public_files_size",
+   "fieldtype": "Int",
+   "label": "Public Files (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "backup_files_size",
+   "fieldtype": "Int",
+   "label": "Backup Files (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "database_details_section",
+   "fieldtype": "Section Break",
+   "label": "Database Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "db_space",
+   "fieldtype": "Int",
+   "label": "Database Space Allowed (MB)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "used_db_space",
+   "fieldtype": "Int",
+   "label": "Database Size (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "users",
+   "fieldtype": "Int",
+   "label": "Users Allowed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "space",
+   "fieldtype": "Int",
+   "label": "Files Space Allowed (MB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
    "fieldtype": "Int",
    "label": "Company Allowed",
    "read_only": 1
   },
   {
-   "fieldname": "active_company",
+   "fieldname": "used_company",
    "fieldtype": "Int",
    "label": "Active Company",
    "read_only": 1
@@ -57,7 +116,7 @@
  ],
  "hide_toolbar": 1,
  "issingle": 1,
- "modified": "2020-06-22 18:14:32.139205",
+ "modified": "2020-12-20 17:04:33.868675",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
