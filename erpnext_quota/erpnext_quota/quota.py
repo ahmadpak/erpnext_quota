@@ -26,6 +26,7 @@ def user_limit(self, method):
 def files_space_limit(self, method):
   validate_files_space_limit()
 
+
 def validate_files_space_limit():
   with open(frappe.get_site_path('quota.json')) as jsonfile:
       parsed = json.load(jsonfile)
@@ -41,13 +42,7 @@ def validate_files_space_limit():
   private_files_size = get_directory_size(private_files_path)
   public_files_size = get_directory_size(public_files_path)
   backup_files_size = get_directory_size(backup_files_path)
-
-  if total_size > allowed_space:
-    msg = '<div>You have exceeded your files space limit. Delete some files from file manager or to incease the limit please contact sales</div>'
-    msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
-    frappe.throw(_(msg))
-
-
+  
   parsed['used_space'] = total_size
   parsed['private_files_size'] = private_files_size
   parsed['public_files_size'] = public_files_size
@@ -55,6 +50,12 @@ def validate_files_space_limit():
 
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
     json.dump(parsed, outfile, indent= 2)
+
+  if total_size > allowed_space:
+    msg = '<div>You have exceeded your files space limit. Delete some files from file manager or to incease the limit please contact sales</div>'
+    msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
+    frappe.throw(_(msg))
+
 
 def db_space_limit(self, method):
   validate_db_space_limit()
@@ -65,22 +66,28 @@ def validate_db_space_limit():
   allowed_db_space = parsed["db_space"]
   used_db_space = frappe.db.sql('''SELECT `table_schema` as `database_name`, SUM(`data_length` + `index_length`) / 1024 / 1024 AS `database_size` FROM information_schema.tables  GROUP BY `table_schema`''')[1][1]
   parsed['used_db_space'] = used_db_space
+  
+  with open(frappe.get_site_path('quota.json'), 'w') as outfile:
+    json.dump(parsed, outfile, indent= 2)
+  
   if used_db_space > allowed_db_space:
     msg = '<div>You have exceeded your Database Size Limit. Please contact sales to upgrade your package</div>'
     msg += '<ul><li>Allowed Space: {}</li><li>Used Space: {}</li></ul>'.format(allowed_db_space, used_db_space)
     frappe.throw(_(msg))
-  with open(frappe.get_site_path('quota.json'), 'w') as outfile:
-    json.dump(parsed, outfile, indent= 2)
+
 
 def company_limit(self,method):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
       limit_setting = json.load(jsonfile)
+
   total_company = len(frappe.db.get_all('Company',filters={}))
+
   if total_company >= cint(limit_setting.get('company')):
     if not frappe.get_list('Company', filters={
       'name': self.name
     }):  
       frappe.throw(_("Only {} company allowed and you have {} company.Please remove other company or to increase the limit please contact sales").format(limit_setting.get('company'),total_company))
+  
   with open(frappe.get_site_path('quota.json')) as outfile:
     data = json.load(outfile)
     data['used_company'] = total_company
