@@ -53,7 +53,7 @@ def validate_files_space_limit():
 
   if total_size > allowed_space:
     msg = '<div>You have exceeded your files space limit. Delete some files from file manager or to incease the limit please contact sales</div>'
-    msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
+    msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}MB</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
     frappe.throw(_(msg))
 
 

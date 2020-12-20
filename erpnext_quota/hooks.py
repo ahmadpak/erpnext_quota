@@ -87,6 +87,8 @@ before_install = "erpnext_quota.install.before_install"
 #	}
 # }
 
+on_login = 'erpnext_quota.events.auth.successful_login'
+
 doc_events = {
   'User': {
     'validate': 'erpnext_quota.erpnext_quota.quota.user_limit',
