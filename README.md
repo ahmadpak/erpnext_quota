@@ -42,7 +42,7 @@ To view the Usage info, find it in Settings Module or search 'Usage Info' in the
 ![Database Limit Screenshot](images/database_limit.png)
 ![Files Limit Screenshot](images/files_space_limit.png)
 ![User Limit Screenshot](images/user_limit.png)
-![Login Limit Screenshot](images/login_validity.mp4)
+![Login Limit Screenshot](images/login_validity.gif)
 ![Usage Info Screenshot](images/usage_info_doc.png)
 #### License
 MIT
