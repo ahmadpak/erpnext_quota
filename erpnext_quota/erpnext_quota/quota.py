@@ -84,7 +84,7 @@ def validate_db_space_limit():
     msg += '<ul><li>Allowed Space: {}MB</li><li>Used Space: {}MB</li></ul>'.format(allowed_db_space, used_db_space)
     frappe.throw(_(msg))
 
-def handle_unified_space_limit(self, method):
+def handle_unified_space_limit():
   with open(frappe.get_site_path('quota.json')) as jsonfile:
       parsed = json.load(jsonfile)
 
