@@ -9,5 +9,9 @@ def successful_login(login_manager):
     
     valid_till = parsed['valid_till']
     diff = date_diff(valid_till, today())
-    if diff < 0:
+
+    site_suspended = 'site_suspended' in parsed and parsed['site_suspended']
+    
+    disable_access = diff < 0 or site_suspended
+    if disable_access:
         frappe.throw(_("You site is suspended. Please contact Sales"), frappe.AuthenticationError)

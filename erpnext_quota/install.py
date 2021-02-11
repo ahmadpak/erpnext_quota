@@ -34,7 +34,8 @@ def before_install():
     'used_company': 1,
     'count_website_users': 0,
     'count_administrator_user': 0,
-    'valid_till': add_days(today(), 14)
+    'valid_till': add_days(today(), 14),
+    'site_disabled': False
   }
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
     json.dump(data, outfile, indent= 2)
