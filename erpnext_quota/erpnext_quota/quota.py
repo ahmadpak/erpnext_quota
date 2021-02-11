@@ -90,8 +90,8 @@ def handle_unified_space_limit():
 
   allowed_storage = parsed["space"]
     
-  used_files_storage = parsed['used_space']
-  used_db_storage    = parsed['used_db_space']
+  used_files_storage = parsed['used_space'] if 'used_space' in parsed else 0
+  used_db_storage    = parsed['used_db_space'] if 'used_db_space' in parsed else 0
 
   total_used_storage = used_files_storage + used_db_storage
 
@@ -102,7 +102,7 @@ def handle_unified_space_limit():
     '<div>',
     _('You have exceeded your storage limit.'),
     '<br>',
-    _('Delete some files to free storage or contact sales to upgrade your package'),
+    _('Delete some files to free storage or contact sales to upgrade your storage limit'),
     '</div>',
     '<ul><li>',
     _('Allowed Storage: {0}MB').format(allowed_storage),
