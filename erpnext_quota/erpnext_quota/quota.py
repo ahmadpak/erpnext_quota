@@ -51,6 +51,10 @@ def validate_files_space_limit():
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
     json.dump(parsed, outfile, indent= 2)
 
+  if 'unified_space_limit' in parsed and parsed['unified_space_limit']:
+    handle_unified_space_limit()
+    return
+
   if total_size > allowed_space:
     msg = '<div>You have exceeded your files space limit. Delete some files from file manager or to incease the limit please contact sales</div>'
     msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}MB</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
@@ -70,12 +74,44 @@ def validate_db_space_limit():
   
   with open(frappe.get_site_path('quota.json'), 'w') as outfile:
     json.dump(parsed, outfile, indent= 2)
+
+  if 'unified_space_limit' in parsed and parsed['unified_space_limit']:
+    handle_unified_space_limit()
+    return
   
   if used_db_space > allowed_db_space:
     msg = '<div>You have exceeded your Database Size Limit. Please contact sales to upgrade your package</div>'
     msg += '<ul><li>Allowed Space: {}MB</li><li>Used Space: {}MB</li></ul>'.format(allowed_db_space, used_db_space)
     frappe.throw(_(msg))
 
+def handle_unified_space_limit(self, method):
+  with open(frappe.get_site_path('quota.json')) as jsonfile:
+      parsed = json.load(jsonfile)
+
+  allowed_storage = parsed["space"]
+    
+  used_files_storage = parsed['used_space']
+  used_db_storage    = parsed['used_db_space']
+
+  total_used_storage = used_files_storage + used_db_storage
+
+  if allowed_storage > total_used_storage:
+    return
+
+  msg = ''.join([
+    '<div>',
+    _('You have exceeded your storage limit.'),
+    '<br>',
+    _('Delete some files to free storage or contact sales to upgrade your package'),
+    '</div>',
+    '<ul><li>',
+    _('Allowed Storage: {0}MB').format(allowed_storage),
+    '</li><li>',
+    _('Used Storage: {0}MB').format(total_used_storage),
+    '</li></ul>'
+  ])
+
+  frappe.throw(msg)
 
 def company_limit(self,method):
   with open(frappe.get_site_path('quota.json')) as jsonfile:
