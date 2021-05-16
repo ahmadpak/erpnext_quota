@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "creation": "2020-02-21 16:16:00.879982",
  "doctype": "DocType",
  "document_type": "System",
@@ -74,7 +75,7 @@
   {
    "default": "0",
    "fieldname": "db_space",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Database Space Allowed (MB)",
    "read_only": 1
   },
@@ -91,19 +92,19 @@
   },
   {
    "fieldname": "users",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Users Allowed",
    "read_only": 1
   },
   {
    "fieldname": "space",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Files Space Allowed (MB)",
    "read_only": 1
   },
   {
    "fieldname": "company",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Company Allowed",
    "read_only": 1
   },
@@ -116,7 +117,8 @@
  ],
  "hide_toolbar": 1,
  "issingle": 1,
- "modified": "2020-12-20 17:04:33.868675",
+ "links": [],
+ "modified": "2021-05-16 12:03:08.056014",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
