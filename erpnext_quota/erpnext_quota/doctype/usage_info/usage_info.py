@@ -12,7 +12,7 @@ import json
 import subprocess
 
 class UsageInfo(Document):
-  
+  @frappe.whitelist()
   def get_usage_info(self):
     usage = {}
     with open(frappe.get_site_path('quota.json')) as jsonfile:
