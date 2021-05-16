@@ -9,7 +9,7 @@ def before_install():
   # Fetching user list
   filters = {
     'enabled': 1,
-    'name': ['!=','Guest', 'Administrator']
+    'name': ['not in',['Guest', 'Administrator']]
   }
   
   user_list = frappe.get_list('User', filters = filters, fields = ["name"])
