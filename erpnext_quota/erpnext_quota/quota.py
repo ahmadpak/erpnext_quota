@@ -105,7 +105,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
   if count_administrator_user == 0:
     filters = {
     'enabled': 1,
-    'name': ['!=','Guest', 'Administrator']
+    'name': ['not in',['Guest', 'Administrator']]
   }
   else:
     filters = {
