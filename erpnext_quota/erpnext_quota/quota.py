@@ -53,14 +53,14 @@ def validate_files_space_limit():
 
   var_type = type(allowed_space)
   
-  if var_type == str and allowed_space == 'Unlimited': pass
+  if var_type == str and allowed_space == 0: pass
   
   elif var_type == int and total_size > allowed_space:
       msg = '<div>You have exceeded your files space limit. Delete some files from file manager or to incease the limit please contact sales</div>'
       msg += '<div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}MB</li></ul></div>'.format(private_files_size, public_files_size, backup_files_size)
       frappe.throw(_(msg))
   else:
-    frappe.throw(_("Invalid value. Can be 'Unlimited' or an Integer"), frappe.ValidationError)
+    frappe.throw(_("Invalid value. Can be a Number only."), frappe.ValidationError)
 
 
 def db_space_limit(self, method):
@@ -79,14 +79,14 @@ def validate_db_space_limit():
 
   var_type = type(allowed_db_space)
   
-  if var_type == str and allowed_db_space == 'Unlimited': pass
+  if var_type == str and allowed_db_space == 0: pass
   
   elif var_type == int and used_db_space > allowed_db_space:
       msg = '<div>You have exceeded your Database Size Limit. Please contact sales to upgrade your package</div>'
       msg += '<ul><li>Allowed Space: {}MB</li><li>Used Space: {}MB</li></ul>'.format(allowed_db_space, used_db_space)
       frappe.throw(_(msg))
   else:
-    frappe.throw(_("Invalid value. Can be 'Unlimited' or an Integer"), frappe.ValidationError)
+    frappe.throw(_("Invalid value. Can be a Number only."), frappe.ValidationError)
 
 
 def company_limit(self,method):
@@ -98,7 +98,7 @@ def company_limit(self,method):
   
   var_type = type(allowed_companies)
   
-  if var_type == str and allowed_companies == 'Unlimited': pass
+  if var_type == str and allowed_companies == 0: pass
   
   elif var_type == int and total_company >= allowed_companies:
       if not frappe.get_list('Company', filters={
@@ -107,7 +107,7 @@ def company_limit(self,method):
         frappe.throw(_("Only {} company(s) allowed and you have {} company(s).Please remove other company or to increase the limit please contact sales").format(limit_setting.get('company'),total_company))
   
   else:
-    frappe.throw(_("Invalid value. Can be 'Unlimited' or an Integer"), frappe.ValidationError)
+    frappe.throw(_("Invalid value. Can be a Number only."), frappe.ValidationError)
 
   with open(frappe.get_site_path('quota.json')) as outfile:
     data = json.load(outfile)
@@ -152,7 +152,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
 
   var_type = type(allowed_users)
   
-  if var_type == str and allowed_users == 'Unlimited': pass
+  if var_type == str and allowed_users == 0: pass
   
   elif var_type == int and active_users >= allowed_users:
       if not frappe.get_list('User', filters={
@@ -162,7 +162,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
       elif self.enabled == 1 and active_users > allowed_users:
         frappe.throw('Only {} active users allowed and you have {} active users. Please disable users or to increase the limit please contact sales'. format(allowed_users, len(user_list)-1))
   else:
-    frappe.throw(_("Invalid value. Can be 'Unlimited' or an Integer"), frappe.ValidationError)
+    frappe.throw(_("Invalid value. Can be a Number only."), frappe.ValidationError)
 
   return active_users
 
