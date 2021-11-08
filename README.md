@@ -3,9 +3,10 @@
 App to manage ERPNext User, Company and Space limitations
 
 #### How to Install
+```
 bench get-app https://github.com/ahmadpak/erpnext_quota
 bench --site *site_name* install-app erpnext_quota
-
+```
 ### Usage
 Install the app. It will create a file quota.json in site directory
 Contents will look similar:
