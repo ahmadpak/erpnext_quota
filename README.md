@@ -11,7 +11,7 @@ bench --site *site_name* install-app erpnext_quota
 Install the app. It will create a file quota.json in site directory
 Contents will look similar:
 
-```
+```json
  {
   "users": 5,
   "active_users": 1,
