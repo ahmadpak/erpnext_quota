@@ -3,15 +3,15 @@
 App to manage ERPNext User, Company and Space limitations
 
 #### How to Install
-bench get-app --branch master erpnext_quota https://github.com/ahmadpak/erpnext_quota
-bench include-app erpnext_quota
+bench get-app https://github.com/ahmadpak/erpnext_quota
 bench --site *site_name* install-app erpnext_quota
 
 ### Usage
 Install the app. It will create a file quota.json in site directory
 Contents will look similar:
 
-{
+```
+ {
   "users": 5,
   "active_users": 1,
   "space": 5120,
@@ -27,7 +27,7 @@ Contents will look similar:
   "backup_files_size": 2,
   "used_db_space": 28
 }
-
+```
 
 Manually change the default values to change the limits. 
 Default is:
