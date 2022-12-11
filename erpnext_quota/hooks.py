@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from . import __version__ as app_version
 
 app_name = "erpnext_quota"
 app_title = "Erpnext Quota"
@@ -39,7 +38,7 @@ app_license = "MIT"
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# "Role": "home_page"
 # }
 
 # Website user home page (by function)
@@ -84,34 +83,34 @@ before_install = "erpnext_quota.install.before_install"
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
-#	}
+# }
 # }
 
 on_login = 'erpnext_quota.events.auth.successful_login'
 
 doc_events = {
-  'User': {
-    'validate': 'erpnext_quota.erpnext_quota.quota.user_limit',
-    'on_update': 'erpnext_quota.erpnext_quota.quota.user_limit'
-  },
-  'Company': {
-    'validate':'erpnext_quota.erpnext_quota.quota.company_limit',
-    'on_update':'erpnext_quota.erpnext_quota.quota.company_limit'
-  },
-  '*': {
-    'on_submit': 'erpnext_quota.erpnext_quota.quota.db_space_limit'
-  },
-  'File': {
-    'validate': 'erpnext_quota.erpnext_quota.quota.files_space_limit'
-  }
+    'User': {
+        'validate': 'erpnext_quota.erpnext_quota.quota.user_limit',
+        'on_update': 'erpnext_quota.erpnext_quota.quota.user_limit'
+    },
+    'Company': {
+        'validate': 'erpnext_quota.erpnext_quota.quota.company_limit',
+        'on_update': 'erpnext_quota.erpnext_quota.quota.company_limit'
+    },
+    '*': {
+        'on_submit': 'erpnext_quota.erpnext_quota.quota.db_space_limit'
+    },
+    'File': {
+        'validate': 'erpnext_quota.erpnext_quota.quota.files_space_limit'
+    }
 }
 # Scheduled Tasks
 # ---------------
 
 scheduler_events = {
-	"daily": [
-		"erpnext_quota.tasks.daily"
-	]
+    "daily": [
+        "erpnext_quota.tasks.daily"
+    ]
 }
 
 # Testing
@@ -132,4 +131,3 @@ scheduler_events = {
 # override_doctype_dashboards = {
 # 	"Task": "erpnext_quota.task.get_dashboard_data"
 # }
-
