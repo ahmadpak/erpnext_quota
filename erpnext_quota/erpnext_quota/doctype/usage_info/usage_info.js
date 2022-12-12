@@ -13,6 +13,5 @@ frappe.ui.form.on('Usage Info', {
 	},
 	refresh: function(frm) {
 		frm.disable_save();
-		
 	}
 });
