@@ -4,22 +4,17 @@
 
 from __future__ import unicode_literals
 
-from dateutil.parser import parse
-from erpnext_quota.erpnext_quota.quota import validate_users
 import frappe
 from frappe.model.document import Document
-import json
-import subprocess
+
 
 class UsageInfo(Document):
-  @frappe.whitelist()
-  def get_usage_info(self):
-    usage = {}
-    with open(frappe.get_site_path('quota.json')) as jsonfile:
-        parsed = json.load(jsonfile)
+    @frappe.whitelist()
+    def get_usage_info(self):
+        quota = frappe.get_site_config()['quota']
+        usage = {}
+        for key, value in quota.items():
+            usage[key] = value
 
-    for key, value in parsed.items():
-      usage[key] = value
-
-    for key, value in usage.items():
-      self.db_set(key, value)
+        for key, value in usage.items():
+            self.db_set(key, value)
