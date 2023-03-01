@@ -24,9 +24,9 @@ class UsageInfo(Document):
         for key, value in usage.items():
             self.db_set(key, value)
 
+        # update document list table
         frappe.db.truncate("Quota Document Limit Detail")
         self.reload()
-        # update document list table
         for item in document_limit:
             self.append('document_limit', item)
         self.save()
