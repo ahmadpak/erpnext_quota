@@ -195,6 +195,7 @@ def document_limit(doc, event):
     for item in frappe.get_site_config()['quota']['document_limit']:
         limit_dict[item['document_type']] = item
 
+    # match the limit based on period and limit number
     if (limit_dict.get(doc.doctype)):
         limit = frappe._dict(limit_dict.get(doc.doctype))
         limit_period = get_limit_period(limit.period)
@@ -204,12 +205,11 @@ def document_limit(doc, event):
             })) >= limit.limit:
             msg = f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator."
             frappe.throw(msg)
-        print({
-            'creation': ['BETWEEN', [str(limit_period.start)+' 00:00:00.000000', 
-                str(limit_period.end)+' 23:59:59.999999']]
-            }, doc.doctype)
 
 def get_limit_period(period):
+    """
+        Get date mappinf for document limit period
+    """
     today = str(getdate())
     periods = {
         'Daily': {'start': today, 'end': today},
