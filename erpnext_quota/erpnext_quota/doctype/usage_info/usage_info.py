@@ -13,8 +13,21 @@ class UsageInfo(Document):
     def get_usage_info(self):
         quota = frappe.get_site_config()['quota']
         usage = {}
+
         for key, value in quota.items():
             usage[key] = value
-
+        
+        # copy out document_limit and remove from dict
+        document_limit = usage['document_limit']
+        del usage['document_limit']
+        
         for key, value in usage.items():
             self.db_set(key, value)
+
+        frappe.db.truncate("Quota Document Limit Detail")
+        self.reload()
+        # update document list table
+        for item in document_limit:
+            self.append('document_limit', item)
+        self.save()
+        self.reload()

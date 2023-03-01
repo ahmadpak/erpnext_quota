@@ -131,13 +131,14 @@
    "fieldname": "document_limit",
    "fieldtype": "Table",
    "label": "Document Limit",
-   "options": "Quota Document Limit Detail"
+   "options": "Quota Document Limit Detail",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-01 21:02:31.207777",
+ "modified": "2023-03-01 21:57:49.498357",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
