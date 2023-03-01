@@ -15,3 +15,19 @@ frappe.ui.form.on('Usage Info', {
 		frm.disable_save();
 	}
 });
+
+
+frappe.ui.form.on('Quota Document Limit Detail', {
+	document_limit_add: function (frm, cdt, cdn){
+		frm.set_query('document_type', 'document_limit', () => {
+			return {
+				filters: {
+					issingle: 0,
+					istable: 0,
+					module: ["!=", "Core"],
+					name: ["NOT IN", "Email Queue", "Notification Log"]
+				}
+			}
+		})
+	}
+});

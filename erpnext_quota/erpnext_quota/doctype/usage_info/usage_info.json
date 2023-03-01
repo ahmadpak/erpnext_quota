@@ -9,6 +9,7 @@
   "users",
   "space",
   "company",
+  "sales_invoice",
   "column_break_3",
   "active_users",
   "used_space",
@@ -21,7 +22,9 @@
   "database_details_section",
   "db_space",
   "column_break_15",
-  "used_db_space"
+  "used_db_space",
+  "document_limit_section",
+  "document_limit"
  ],
  "fields": [
   {
@@ -113,12 +116,28 @@
    "fieldtype": "Int",
    "label": "Active Company",
    "read_only": 1
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Data",
+   "label": "Sales Invoice "
+  },
+  {
+   "fieldname": "document_limit_section",
+   "fieldtype": "Section Break",
+   "label": "Document Limit"
+  },
+  {
+   "fieldname": "document_limit",
+   "fieldtype": "Table",
+   "label": "Document Limit",
+   "options": "Quota Document Limit Detail"
   }
  ],
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-05-16 12:03:08.056014",
+ "modified": "2023-03-01 21:02:31.207777",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
