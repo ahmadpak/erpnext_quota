@@ -216,7 +216,7 @@ def get_limit_period(period):
     end = start + timedelta(days=6)
     periods = {
         'Daily': {'start': str(today), 'end': str(today)},
-        'Weekly': {'start': str(add_days(start, -1)), 'end': str(add_days(end, -1))},
+        'Weekly': {'start': str(start), 'end': str(end)},
         'Monthly': {'start': str(get_first_day(today)), 'end': str(get_last_day(today))},
     }
     return frappe._dict(periods.get(period))
