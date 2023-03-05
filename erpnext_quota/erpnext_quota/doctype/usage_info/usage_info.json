@@ -9,7 +9,6 @@
   "users",
   "space",
   "company",
-  "sales_invoice",
   "column_break_3",
   "active_users",
   "used_space",
@@ -118,11 +117,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "sales_invoice",
-   "fieldtype": "Data",
-   "label": "Sales Invoice "
-  },
-  {
    "fieldname": "document_limit_section",
    "fieldtype": "Section Break",
    "label": "Document Limit"
@@ -138,7 +132,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-01 21:57:49.498357",
+ "modified": "2023-03-05 12:34:56.681577",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",

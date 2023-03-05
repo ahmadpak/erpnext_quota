@@ -203,17 +203,20 @@ def document_limit(doc, event):
             'creation': ['BETWEEN', [str(limit_period.start)+' 00:00:00.000000', 
                 str(limit_period.end)+' 23:59:59.999999']]
             })) >= limit.limit:
-            msg = f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator."
+            msg = _(f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator.")
             frappe.throw(msg)
 
 def get_limit_period(period):
     """
         Get date mappinf for document limit period
     """
-    today = str(getdate())
+    from datetime import date, timedelta
+    today = date.today()
+    start = today - timedelta(days=today.weekday())
+    end = start + timedelta(days=6)
     periods = {
-        'Daily': {'start': today, 'end': today},
-        'Weekly': {'start': add_days(today, -6), 'end': today},
-        'Monthly': {'start': add_months(today, -1), 'end': today},
+        'Daily': {'start': str(today), 'end': str(today)},
+        'Weekly': {'start': str(add_days(start, -1)), 'end': str(add_days(end, -1))},
+        'Monthly': {'start': str(add_months(today, -1)), 'end': str(today)},
     }
     return frappe._dict(periods.get(period))
