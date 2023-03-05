@@ -110,7 +110,7 @@ def validate_files_space_limit():
         <div><ul><li>Private Files: {}MB</li><li>Public Files: {}MB</li><li>Backup Files: {}MB</li></ul></div>
         '''.format(private_files_size, public_files_size, backup_files_size)
 
-    frappe.throw(_(msg))
+        frappe.throw(_(msg))
 
 
 # DB
