@@ -190,11 +190,10 @@ def get_directory_size(path):
     return int(total_size)
 
 def document_limit(doc, event):
-    # store limits docs in dictionary
+    """
+    We check for the doctype in document_limit and compute accordingly.
+    """
     limit_dict = frappe.get_site_config()['quota']['document_limit']
-    print(limit_dict)
-    # match the limit based on period and limit number
-    print(limit_dict.get(doc.doctype))
     if (limit_dict.get(doc.doctype)):
         limit = frappe._dict(limit_dict.get(doc.doctype))
         limit_period = get_limit_period(limit.period)
