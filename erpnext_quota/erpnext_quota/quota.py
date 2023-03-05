@@ -1,5 +1,5 @@
 import subprocess
-
+from datetime import date, timedelta
 import frappe
 from frappe import _
 from frappe.installer import update_site_config
@@ -210,7 +210,6 @@ def get_limit_period(period):
     """
         Get date mappinf for document limit period
     """
-    from datetime import date, timedelta
     today = date.today()
     start = today - timedelta(days=today.weekday())
     end = start + timedelta(days=6)
