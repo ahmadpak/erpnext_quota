@@ -3,7 +3,7 @@ import subprocess
 import frappe
 from frappe import _
 from frappe.installer import update_site_config
-from frappe.utils import getdate, add_days, add_months
+from frappe.utils import (getdate, add_days, add_months, get_first_day, get_last_day)
 
 
 # User
@@ -217,6 +217,6 @@ def get_limit_period(period):
     periods = {
         'Daily': {'start': str(today), 'end': str(today)},
         'Weekly': {'start': str(add_days(start, -1)), 'end': str(add_days(end, -1))},
-        'Monthly': {'start': str(add_months(today, -1)), 'end': str(today)},
+        'Monthly': {'start': str(get_first_day(today)), 'end': str(get_last_day(today))},
     }
     return frappe._dict(periods.get(period))
