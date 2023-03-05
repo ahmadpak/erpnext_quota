@@ -191,18 +191,18 @@ def get_directory_size(path):
 
 def document_limit(doc, event):
     # store limits docs in dictionary
-    limit_dict = {}
-    for item in frappe.get_site_config()['quota']['document_limit']:
-        limit_dict[item['document_type']] = item
-
+    limit_dict = frappe.get_site_config()['quota']['document_limit']
+    print(limit_dict)
     # match the limit based on period and limit number
+    print(limit_dict.get(doc.doctype))
     if (limit_dict.get(doc.doctype)):
         limit = frappe._dict(limit_dict.get(doc.doctype))
         limit_period = get_limit_period(limit.period)
-        if len(frappe.db.get_list(doc.doctype, filters={
+        usage = len(frappe.db.get_list(doc.doctype, filters={
             'creation': ['BETWEEN', [str(limit_period.start)+' 00:00:00.000000', 
                 str(limit_period.end)+' 23:59:59.999999']]
-            })) >= limit.limit:
+            }))
+        if usage >= limit.limit:
             msg = _(f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator.")
             frappe.throw(msg)
 

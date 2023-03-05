@@ -37,13 +37,12 @@ def before_install():
         'count_website_users': 0,
         'count_administrator_user': 0,
         'valid_till': add_days(today(), 14),
-        'document_limit': [
-            {
-                'document_type': 'Sales Invoice',
-                'limit': 1,
-                'period': 'Daily'
-            }
-        ]
+        'document_limit': {
+            "Sales Invoice": {'limit': 10, 'period': 'Daily', 'usage': 0},
+            "Purchase Invoice": {'limit': 10, 'period': 'Weekly', 'usage': 0},
+            "Journal Entry": {'limit': 10, 'period': 'Monthly', 'usage': 0},
+            "Payment Entry": {'limit': 10, 'period': 'Monthly', 'usage': 0}
+        }
     }
 
     # Updating site config
