@@ -44,7 +44,7 @@
   },
   {
    "fieldname": "space_usage_details_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Space Usage Details"
   },
   {
@@ -71,7 +71,7 @@
   },
   {
    "fieldname": "database_details_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Database Details"
   },
   {
@@ -118,7 +118,7 @@
   },
   {
    "fieldname": "document_limit_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Document Limit"
   },
   {
@@ -132,7 +132,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-05 12:34:56.681577",
+ "modified": "2023-03-19 01:58:17.445013",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",
@@ -148,5 +148,6 @@
  ],
  "quick_entry": 1,
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }
