@@ -204,8 +204,8 @@ def document_limit(doc, event):
                 'creation': ['BETWEEN', [str(limit_period.start) + ' 00:00:00.000000', str(limit_period.end) + ' 23:59:59.999999']]
             }))
         if usage >= limit.limit:
-            msg = _(f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator.")
-            frappe.throw(msg)
+            msg = _(f"Your have reached your {doc.doctype} {limit.period} limit of {limit.limit} and hench cannot create new document. Please contact administrator.")
+            frappe.throw(msg, title="Quota Limit")
 
 
 def get_limit_period(period):
