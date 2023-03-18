@@ -98,7 +98,8 @@ doc_events = {
         'on_update': 'erpnext_quota.erpnext_quota.quota.company_limit'
     },
     '*': {
-        'on_submit': 'erpnext_quota.erpnext_quota.quota.db_space_limit'
+        'on_submit': 'erpnext_quota.erpnext_quota.quota.db_space_limit',
+        'before_insert': 'erpnext_quota.erpnext_quota.quota.document_limit'
     },
     'File': {
         'validate': 'erpnext_quota.erpnext_quota.quota.files_space_limit'

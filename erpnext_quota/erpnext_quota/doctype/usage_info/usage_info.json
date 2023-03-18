@@ -21,7 +21,9 @@
   "database_details_section",
   "db_space",
   "column_break_15",
-  "used_db_space"
+  "used_db_space",
+  "document_limit_section",
+  "document_limit"
  ],
  "fields": [
   {
@@ -113,12 +115,24 @@
    "fieldtype": "Int",
    "label": "Active Company",
    "read_only": 1
+  },
+  {
+   "fieldname": "document_limit_section",
+   "fieldtype": "Section Break",
+   "label": "Document Limit"
+  },
+  {
+   "fieldname": "document_limit",
+   "fieldtype": "Table",
+   "label": "Document Limit",
+   "options": "Quota Document Limit Detail",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-05-16 12:03:08.056014",
+ "modified": "2023-03-05 12:34:56.681577",
  "modified_by": "Administrator",
  "module": "Erpnext Quota",
  "name": "Usage Info",

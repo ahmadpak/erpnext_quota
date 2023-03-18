@@ -1,8 +1,9 @@
 import subprocess
-
+from datetime import date, timedelta
 import frappe
 from frappe import _
 from frappe.installer import update_site_config
+from frappe.utils import (getdate, add_days, add_months, get_first_day, get_last_day)
 
 
 # User
@@ -187,3 +188,33 @@ def get_directory_size(path):
             total_size += chr(char)
 
     return int(total_size)
+
+def document_limit(doc, event):
+    """
+    We check for the doctype in document_limit and compute accordingly.
+    """
+    limit_dict = frappe.get_site_config()['quota']['document_limit']
+    if (limit_dict.get(doc.doctype)):
+        limit = frappe._dict(limit_dict.get(doc.doctype))
+        limit_period = get_limit_period(limit.period)
+        usage = len(frappe.db.get_list(doc.doctype, filters={
+            'creation': ['BETWEEN', [str(limit_period.start)+' 00:00:00.000000', 
+                str(limit_period.end)+' 23:59:59.999999']]
+            }))
+        if usage >= limit.limit:
+            msg = _(f"Limit exceeded for {doc.doctype}, {limit.period} limit is {limit.limit}. Please contact administrator.")
+            frappe.throw(msg)
+
+def get_limit_period(period):
+    """
+        Get date mappinf for document limit period
+    """
+    today = date.today()
+    start = today - timedelta(days=today.weekday())
+    end = start + timedelta(days=6)
+    periods = {
+        'Daily': {'start': str(today), 'end': str(today)},
+        'Weekly': {'start': str(start), 'end': str(end)},
+        'Monthly': {'start': str(get_first_day(today)), 'end': str(get_last_day(today))},
+    }
+    return frappe._dict(periods.get(period))

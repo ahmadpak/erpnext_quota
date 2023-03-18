@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-01 21:01:37.958915",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "period",
+  "limit",
+  "column_break_vjt7h",
+  "usage",
+  "from_date",
+  "to_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "limit",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Limit",
+   "reqd": 1
+  },
+  {
+   "default": "Daily",
+   "fieldname": "period",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Period",
+   "options": "Daily\nWeekly\nMonthly",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "usage",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Usage"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To Date"
+  },
+  {
+   "fieldname": "column_break_vjt7h",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2023-03-05 14:07:37.765300",
+ "modified_by": "Administrator",
+ "module": "Erpnext Quota",
+ "name": "Quota Document Limit Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
