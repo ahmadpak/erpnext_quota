@@ -38,10 +38,10 @@ def before_install():
         'count_administrator_user': 0,
         'valid_till': add_days(today(), 14),
         'document_limit': {
-            "Sales Invoice": {'limit': 10, 'period': 'Daily'},
-            "Purchase Invoice": {'limit': 10, 'period': 'Weekly'},
-            "Journal Entry": {'limit': 10, 'period': 'Monthly'},
-            "Payment Entry": {'limit': 10, 'period': 'Monthly'}
+            'Sales Invoice': {'limit': 10, 'period': 'Daily'},
+            'Purchase Invoice': {'limit': 10, 'period': 'Weekly'},
+            'Journal Entry': {'limit': 10, 'period': 'Monthly'},
+            'Payment Entry': {'limit': 10, 'period': 'Monthly'}
         }
     }
 
