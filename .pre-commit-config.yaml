@@ -1,0 +1,33 @@
+exclude: 'node_modules|.git'
+default_stages: [commit]
+fail_fast: false
+
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+        files: "erpnext_quota.*"
+        exclude: ".*json$|.*txt$|.*csv|.*md"
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-ast
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        args: ['--config', '.github/helper/.flake8_strict', "--ignore=F401,E501,W191,E302"]
+        exclude: ".*setup.py$"
+
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.9.1
+    hooks:
+      - id: isort
+        exclude: ".*setup.py$"
+
+ci:
+    autoupdate_schedule: weekly
+    skip: []
+    submodules: false
