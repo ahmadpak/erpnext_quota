@@ -42,7 +42,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
     if count_administrator_user == 0:
         filters['name'] = ['not in', ['Guest', 'Administrator']]
 
-    user_list = frappe.get_list('User', filters, ["name"])
+    user_list = frappe.get_all('User', filters, ["name"])
     active_users = len(user_list)
     is_desk = ""
 
@@ -52,7 +52,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
         is_desk = "Desk"
 
     for user in user_list:
-        roles = frappe.get_list("Has Role", {'parent': user.name}, ['role'])
+        roles = frappe.get_all("Has Role", {'parent': user.name}, ['role'])
         for row in roles:
             if frappe.get_value("Role", row.role, "desk_access") == 1:
                 active_users += 1
@@ -60,7 +60,7 @@ def validate_users(self, count_administrator_user, count_website_users, allowed_
 
     # Users limit validation
     if allowed_users != 0 and active_users >= allowed_users:
-        if not frappe.get_list('User', filters={'name': self.name}):
+        if not frappe.get_all('User', filters={'name': self.name}):
             frappe.throw('Only {} active {} users allowed and you have {} active users. Please disable users or to increase the limit please contact sales'. format(allowed_users, is_desk, active_users))
 
     return active_users
@@ -170,7 +170,7 @@ def company_limit(self, method):
 
     # Validation
     if allowed_companies != 0 and total_company >= allowed_companies:
-        if not frappe.get_list('Company', {'name': self.name}):
+        if not frappe.get_all('Company', {'name': self.name}):
             frappe.throw(_("Only {} company(s) allowed and you have {} company(s).Please remove other company or to increase the limit please contact sales").format(quota.get('company'), total_company))
 
 
@@ -198,7 +198,7 @@ def document_limit(doc, event):
     if (limit_dict.get(doc.doctype)):
         limit = frappe._dict(limit_dict.get(doc.doctype))
         limit_period = get_limit_period(limit.period)
-        usage = len(frappe.db.get_list(
+        usage = len(frappe.db.get_all(
             doc.doctype,
             filters={
                 'creation': ['BETWEEN', [str(limit_period.start) + ' 00:00:00.000000', str(limit_period.end) + ' 23:59:59.999999']]

@@ -31,7 +31,7 @@ class UsageInfo(Document):
         self.reload()
         for key, value in document_limit.items():
             period = get_limit_period(value['period'])
-            value['usage'] = len(frappe.db.get_list(
+            value['usage'] = len(frappe.db.get_all(
                 key,
                 {'creation': ["BETWEEN", [f"{period.start} 00:00:00.000000", f"{period.end} 23:23:59.999999"]]}
             ))

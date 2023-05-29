@@ -9,12 +9,12 @@ def before_install():
         'name': ['not in', ['Guest', 'Administrator']]
     }
 
-    user_list = frappe.get_list('User', filters=filters, fields=["name"])
+    user_list = frappe.get_all('User', filters=filters, fields=["name"])
 
     active_users = 0
 
     for user in user_list:
-        roles = frappe.get_list(
+        roles = frappe.get_all(
             "Has Role",
             filters={
                 'parent': user.name
